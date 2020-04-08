@@ -10,6 +10,10 @@ import 'express-async-errors';
 import BaseRouter from './routes';
 import logger from '@shared/Logger';
 
+import TimeSheetRouter from './routes/TimeSheets';
+import UserRouter from './routes/CustomeUser';
+import db from './utils/db'
+
 
 // Init express
 const app = express();
@@ -45,7 +49,8 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     });
 });
 
-
+db.on('error', console.error.bind(console, 'connection error: '));
+db.on('connection', () =>  console.log('connected'));
 
 /************************************************************************************
  *                              Serve front-end content
@@ -55,9 +60,8 @@ const viewsDir = path.join(__dirname, 'views');
 app.set('views', viewsDir);
 const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
-app.get('*', (req: Request, res: Response) => {
-    res.sendFile('index.html', {root: viewsDir});
-});
+app.use('/timeSheet', TimeSheetRouter);
+app.use('/user', UserRouter);
 
 // Export express instance
 export default app;

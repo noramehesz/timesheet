@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2c78a155-12e2-4b59-9af8-5044dec33fac" name="Default Changelist" comment="" />
+    <list default="true" id="2c78a155-12e2-4b59-9af8-5044dec33fac" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/controller/TimeSheetController.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/UserController.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/CustomeUser.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/TimeSheets.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Timesheet.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Timesheet.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tslint.json" beforeDir="false" afterPath="$PROJECT_DIR$/tslint.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +27,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1ZuYwBccZLI6aaSDukapFh6cSiM" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -42,10 +59,24 @@
       <updated>1585690681497</updated>
       <workItem from="1585690682849" duration="1293000" />
       <workItem from="1585723561161" duration="83000" />
+      <workItem from="1586204724382" duration="1334000" />
+      <workItem from="1586242582554" duration="21000" />
+      <workItem from="1586285787959" duration="11933000" />
+      <workItem from="1586375256384" duration="4696000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="550" y="366" key="com.intellij.ide.util.TipDialog" timestamp="1586242594261">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="550" y="366" key="com.intellij.ide.util.TipDialog/1792.23.1920.1057/0.23.1792.1017@0.23.1792.1017" timestamp="1586242594261" />
+    <state x="561" y="248" width="670" height="676" key="search.everywhere.popup" timestamp="1586379849133">
+      <screen x="0" y="23" width="1792" height="1017" />
+    </state>
+    <state x="561" y="248" width="670" height="676" key="search.everywhere.popup/1792.23.1920.1057/0.23.1792.1017@0.23.1792.1017" timestamp="1586379849133" />
   </component>
 </project>
