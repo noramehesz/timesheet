@@ -12,6 +12,7 @@ import logger from '@shared/Logger';
 
 import TimeSheetRouter from './routes/TimeSheets';
 import UserRouter from './routes/CustomeUser';
+import JobRouter from './routes/Jobs'
 import db from './utils/db'
 
 
@@ -62,6 +63,7 @@ const staticDir = path.join(__dirname, 'public');
 app.use(express.static(staticDir));
 app.use('/timeSheet', TimeSheetRouter);
 app.use('/user', UserRouter);
+app.use('/job', JobRouter);
 
 // Export express instance
 export default app;

@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
-import User from '../models/User';
 
 const TimeSheetSchema = new mongoose.Schema({
-    owner: {type: String, required: true},
+    owner: {type: [mongoose.Types.ObjectId], required: true},
     job: String,
     timeSheetDate: Date,
     days: [],
@@ -41,7 +40,7 @@ class TimeSheet extends mongoose.Document {
             }
             console.log(`create new TimeSheet, id: ${timeSheet.id}`);
         });
-        return {message: 'Timesheet created', id: timeSheet.id, error: errorMeesage};
+        return {message: 'Timesheet created', id: timeSheet.id, error: errorMeesage, createdTimeSheet: timeSheet};
 
     }
 

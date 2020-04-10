@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import TimeSheet from './Timesheet';
+import TimeSheetModel from './Timesheet';
 
 enum UserType {
     student = 'student',
@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
     name: {type: String, required: true},
     username: {type: String, required: true},
     school: {type: String, required: false},
-    timesheets: {type: [String], required: false},
+    timesheets: {type: [mongoose.Types.ObjectId], required: false},
     students: {type: [{student: this, job: String}], required: false},
     companies: {type: [this], required: false},
     employees: {type: [this], required: false},
@@ -40,7 +40,7 @@ class User extends mongoose.Document {
             console.log(`create a user with id: ${user.id}`);
         });
 
-        return {message: `creat a user witn id: ${user.id}`};
+        return {message: `creat a user witn id: ${user.id}`, createdUser: user};
     }
 
     static getUsers() {

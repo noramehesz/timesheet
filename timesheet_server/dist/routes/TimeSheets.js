@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+const express_1 = require("express");
+const TimeSheetController_1 = tslib_1.__importDefault(require("../controller/TimeSheetController"));
+const router = express_1.Router();
+router.post('/', TimeSheetController_1.default.createTimeSheet);
+router.delete('/:id', TimeSheetController_1.default.deleteTimeSheetById);
+router.get('/', TimeSheetController_1.default.getAllTimeSheets);
+router.get('/:id', TimeSheetController_1.default.getTimeSheetById);
+router.put('/', TimeSheetController_1.default.updateTimeSheetById);
+exports.default = router;
