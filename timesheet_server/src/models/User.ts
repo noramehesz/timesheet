@@ -9,7 +9,8 @@ enum UserType {
 
 const UserSchema = new mongoose.Schema({
     email: {type: String, required: true},
-    name: {type: String, required: true},
+    name: {type: String, required: false},
+    password: {type: String, required: true},
     username: {type: String, required: true},
     school: {type: String, required: false},
     timesheets: {type: [mongoose.Types.ObjectId], required: false},
@@ -28,6 +29,7 @@ class User extends mongoose.Document {
             email: data.email,
             name: data.name,
             username: data.username,
+            password: data.password,
             school: data.school,
             timesheets: data.timesheets,
             students: data.students,
@@ -36,11 +38,16 @@ class User extends mongoose.Document {
             role: data.role,
         });
 
+        let errorMessage: string = '';
+
         await user.save((error, document) => {
+            if (error) {
+                errorMessage = error;
+            }
             console.log(`create a user with id: ${user.id}`);
         });
 
-        return {message: `creat a user witn id: ${user.id}`, createdUser: user};
+        return {message: `creat a user witn id: ${user.id}`, createdUser: user, error: errorMessage}; // -pw
     }
 
     static getUsers() {
@@ -57,9 +64,19 @@ class User extends mongoose.Document {
         });
     }
 
+    static login(username: string, password: string) {
+        return UserModel.findOne({password, username}, (error, document) => {
+            if (error) {
+                return {error: 'cant login'};
+            }
+            console.log(`get user, username: ${username}`);
+            return document;
+        })
+    }
+
     static deleteUserById(id: string) {
         return UserModel.findByIdAndDelete(id, (error, document) => {
-            console.log(`delet a uder with id: ${id}`);
+            console.log(`delet a user with id: ${id}`);
             return document;
         })
     }

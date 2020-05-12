@@ -6,19 +6,23 @@ const createUser = async (req: Request, res: Response) => {
 }
 
 const getUsers = (req: Request, res: Response) => {
-    User.getUsers().then(getAll => {res.send(getAll); console.log(getAll)});
+    User.getUsers().then(getAll => {res.send(getAll); console.log(getAll);});
 }
 
 const getUserById = (req: Request, res: Response) => {
-    User.getUserById(req.params.id).then(user => {res.send(user)});
+    User.getUserById(req.params.id).then(user => {res.send(user);});
 }
 
 const deleteUserById = (req: Request, res: Response) => {
-    User.deleteUserById(req.params.id).then(deletedUser => {res.send(deletedUser)});
+    User.deleteUserById(req.params.id).then(deletedUser => {res.send(deletedUser);});
 }
 
 const updateUser = (req: Request, res: Response) => {
-    User.updateUserById(req.body.id, req.body).then(updated => {res.send(updated)});
+    User.updateUserById(req.body.id, req.body).then(updated => {res.send(updated);});
+}
+
+const login = (req: Request, res: Response) => {
+    User.login(req.body.username, req.body.password).then(user => {res.send(user);})
 }
 
 export default {
@@ -27,4 +31,5 @@ export default {
   getUserById,
   deleteUserById,
   updateUser,
+  login,
 };

@@ -16,6 +16,8 @@ import {
     Route,
     Link
 } from "react-router-dom";
+import axios from "axios";
+import {Simulate} from "react-dom/test-utils";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -37,17 +39,54 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+interface SignInProps {
+    user: any;
+}
 
-
-export default function SignIn() {
+export default function SignIn(props: SignInProps) {
     const classes = useStyles();
+    const [toLogin, setToLogin] = React.useState({password: "", username: ''});
+
+    const handleSignInOnClick = async (event: any) => {
+        await axios.post(`http://localhost:3001/user/login`, toLogin).then(loggedInUser => {
+                if (loggedInUser.data == null) {
+                    return;
+                } else {
+                    let user = loggedInUser.data;
+                    props.user({
+                        username: user.username,
+                        email: user.email,
+                        role: user.role,
+                        id: user.id,
+                        name: user.name,
+                        school: user.school,
+                        students: user.students,
+                        timeSheets: user.timesheets,
+                        companies: user.companies,
+                        employees: user.employees,
+                    });
+                }
+            });
+    }
+
+    const handlePasswordOnChange = (event: any) => {
+        let user = Object.assign({}, toLogin);
+        user.password = event.target.value;
+        setToLogin(user);
+    }
+
+    const handleUsernameOnChange = (event: any) => {
+        let user = Object.assign({}, toLogin);
+        user.username = event.target.value;
+        setToLogin(user);
+    }
 
     return (
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
+            <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
+                    <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign in
@@ -63,6 +102,7 @@ export default function SignIn() {
                         name="username"
                         autoComplete="username"
                         autoFocus
+                        onChange={handleUsernameOnChange}
                     />
                     <TextField
                         variant="outlined"
@@ -74,6 +114,7 @@ export default function SignIn() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={handlePasswordOnChange}
                     />
                     <Button
                         type="submit"
@@ -81,15 +122,18 @@ export default function SignIn() {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={handleSignInOnClick}
                     >
+                        <Link to={"/studentPage"} style={{color: "white"}}>
                         Sign In
+                        </Link>
                     </Button>
                     <Grid container>
-                        <Grid item>
-                            <Link  to="/signUp" >
+                        <Link to={"/signUp"}>
+                            <Grid item>
                                 {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
+                            </Grid>
+                        </Link>
                     </Grid>
                 </form>
             </div>

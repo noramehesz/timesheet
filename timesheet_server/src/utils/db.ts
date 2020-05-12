@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-mongoose.connect('mongodb://localhost/timesheet', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/timesheet', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 

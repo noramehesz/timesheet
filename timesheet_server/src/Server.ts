@@ -14,11 +14,11 @@ import TimeSheetRouter from './routes/TimeSheets';
 import UserRouter from './routes/CustomeUser';
 import JobRouter from './routes/Jobs'
 import db from './utils/db'
+import cors from 'cors';
 
 
 // Init express
 const app = express();
-
 
 
 /************************************************************************************
@@ -49,6 +49,8 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
         error: err.message,
     });
 });
+
+app.use(cors());
 
 db.on('error', console.error.bind(console, 'connection error: '));
 db.on('connection', () =>  console.log('connected'));

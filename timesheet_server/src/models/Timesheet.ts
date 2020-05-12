@@ -32,7 +32,7 @@ class TimeSheet extends mongoose.Document {
             days: [],
         });
 
-        let errorMeesage;
+        let errorMeesage = '';
 
         await timeSheet.save((error, document) => {
             if (error) {
