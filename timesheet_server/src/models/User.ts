@@ -65,12 +65,13 @@ class User extends mongoose.Document {
     }
 
     static login(username: string, password: string) {
+        let errorMessage: any = null;
         return UserModel.findOne({password, username}, (error, document) => {
             if (error) {
-                return {error: 'cant login'};
+               errorMessage = error;
             }
-            console.log(`get user, username: ${username}`);
-            return document;
+            console.log(`try to get user, username: ${username}`);
+            return {doc: document, error: errorMessage};
         })
     }
 

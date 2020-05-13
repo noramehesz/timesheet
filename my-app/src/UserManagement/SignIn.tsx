@@ -17,7 +17,6 @@ import {
     Link
 } from "react-router-dom";
 import axios from "axios";
-import {Simulate} from "react-dom/test-utils";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -46,13 +45,11 @@ interface SignInProps {
 export default function SignIn(props: SignInProps) {
     const classes = useStyles();
     const [toLogin, setToLogin] = React.useState({password: "", username: ''});
+    const [isWrongData, setIsWrongData] = React.useState({isWrong: false});
 
     const handleSignInOnClick = async (event: any) => {
-        await axios.post(`http://localhost:3001/user/login`, toLogin).then(loggedInUser => {
-                if (loggedInUser.data == null) {
-                    return;
-                } else {
-                    let user = loggedInUser.data;
+        await axios.post(`http://localhost:3001/user/login`, toLogin).then(res => {
+                    let user = res.data;
                     props.user({
                         username: user.username,
                         email: user.email,
@@ -65,17 +62,21 @@ export default function SignIn(props: SignInProps) {
                         companies: user.companies,
                         employees: user.employees,
                     });
-                }
-            });
+            }).catch(error => {
+                setIsWrongData({isWrong: true});
+                console.error(error);
+        });
     }
 
     const handlePasswordOnChange = (event: any) => {
+        setIsWrongData({isWrong: false});
         let user = Object.assign({}, toLogin);
         user.password = event.target.value;
         setToLogin(user);
     }
 
     const handleUsernameOnChange = (event: any) => {
+        setIsWrongData({isWrong: false});
         let user = Object.assign({}, toLogin);
         user.username = event.target.value;
         setToLogin(user);
@@ -91,7 +92,6 @@ export default function SignIn(props: SignInProps) {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <form className={classes.form} noValidate>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -116,6 +116,9 @@ export default function SignIn(props: SignInProps) {
                         autoComplete="current-password"
                         onChange={handlePasswordOnChange}
                     />
+                    {isWrongData.isWrong && <Typography component="h1" variant="h6" align={"center"}>
+                        Can't log in
+                    </Typography>}
                     <Button
                         type="submit"
                         fullWidth
@@ -135,7 +138,6 @@ export default function SignIn(props: SignInProps) {
                             </Grid>
                         </Link>
                     </Grid>
-                </form>
             </div>
         </Container>
     );

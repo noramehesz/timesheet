@@ -22,7 +22,14 @@ const updateUser = (req: Request, res: Response) => {
 }
 
 const login = (req: Request, res: Response) => {
-    User.login(req.body.username, req.body.password).then(user => {res.send(user);})
+    User.login(req.body.username, req.body.password).then(user => {
+        if (user == null) {
+            res.statusCode = 500;
+            res.send();
+        } else {
+            res.send(user);
+        }
+    })
 }
 
 export default {

@@ -2,24 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c78a155-12e2-4b59-9af8-5044dec33fac" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../my-app/src/StudentPages/MainPageForStudent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../my-app/src/UserManagement/SignUp.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my-app/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../my-app/src/UserManagement/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/UserManagement/SignIn.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/cors/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/cors/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/UserController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/UserController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Timesheet.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Timesheet.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/User.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/CustomeUser.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/CustomeUser.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/db.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +60,8 @@
       <workItem from="1588454854872" duration="447000" />
       <workItem from="1588457150652" duration="2294000" />
       <workItem from="1588513943177" duration="2155000" />
-      <workItem from="1589309781785" duration="5924000" />
+      <workItem from="1589309781785" duration="5996000" />
+      <workItem from="1589382593354" duration="2773000" />
     </task>
     <servers />
   </component>
