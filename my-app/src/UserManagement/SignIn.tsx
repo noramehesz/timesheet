@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface SignInProps {
-    user: any;
+    setUser: any;
 }
 
 export default function SignIn(props: SignInProps) {
@@ -50,7 +50,7 @@ export default function SignIn(props: SignInProps) {
     const handleSignInOnClick = async (event: any) => {
         await axios.post(`http://localhost:3001/user/login`, toLogin).then(res => {
                     let user = res.data;
-                    props.user({
+                    props.setUser({
                         username: user.username,
                         email: user.email,
                         role: user.role,

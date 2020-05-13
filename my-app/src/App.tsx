@@ -58,18 +58,18 @@ function App() {
             <Router>
                 <Switch>
                     <Route path={"/signIn"}>
-                        <SignIn user={setUser}/>
+                        <SignIn setUser={setUser}/>
                     </Route>
                     <Route path={"/signUp"}>
                         <SignUp setUser={setUser}/>
                     </Route>
                     { user != null &&
                         <Route path={"/studentPage"}>
-                            <MainPageForStudent user={user}/>
+                            <MainPageForStudent user={user} setUserState={setUser}/>
                         </Route>
                     }
                     <Route path={"/"}>
-                        <SignIn user={setUser}/>
+                        <SignIn setUser={setUser}/>
                     </Route>
                 </Switch>
             </Router>
