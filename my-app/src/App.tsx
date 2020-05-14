@@ -19,10 +19,10 @@ export enum UserType {
 }
 
 export type TimeSheet = {
-    owner: {type: User, required: true},
-    job: String,
-    timeSheetDate: {day: Day, time: Time},
-    days: [],
+    owner?: {type: User},
+    job?: String,
+    timeSheetDate: Date,
+    days: Day[],
 };
 
 type Time = {
@@ -32,9 +32,9 @@ type Time = {
 
 type Day =  {
     dayOfMoth: number,
-    arrive: Time,
-    leave: Time,
-    workingHours: number,
+    arrive: string,
+    leave: string,
+    workingHours: string,
 }
 
 export type User = {
@@ -63,7 +63,7 @@ function App() {
                     <Route path={"/signUp"}>
                         <SignUp setUser={setUser}/>
                     </Route>
-                    { user != null &&
+                    { // user != null &&
                         <Route path={"/studentPage"}>
                             <MainPageForStudent user={user} setUserState={setUser}/>
                         </Route>

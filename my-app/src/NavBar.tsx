@@ -1,5 +1,5 @@
 import Toolbar from "@material-ui/core/Toolbar";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import ListAlt from "@material-ui/icons/ListAlt";
 import Typography from "@material-ui/core/Typography";
 import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button";
@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     },
     icon: {
         marginRight: theme.spacing(2),
+        marginTop: '4px',
     },
     logOutButton: {
         display: 'flex',
@@ -46,7 +47,7 @@ export default function NavBar(props: NavBarProps) {
         <AppBar position="relative" style={{display: "flex"}}>
             <Toolbar className={classes.toolbar}>
                 <div className={classes.usersData}>
-                    <AccountCircle className={classes.icon} />
+                    <ListAlt className={classes.icon} />
                     <Typography variant="h6" color="inherit" noWrap>
                         TimeSheet
                     </Typography>
