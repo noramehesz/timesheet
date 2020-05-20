@@ -24,15 +24,21 @@ const useStyles = makeStyles(theme => ({
     icon: {
         marginRight: theme.spacing(2),
         marginTop: '4px',
+        color: 'rgba(0, 0, 0, 0.8)',
+        textShadow: '2px',
+        shadowBlur: '4'
     },
     logOutButton: {
         marginRight: '20px',
         textDecoration: 'none',
-        color: 'white',
+        color: 'black',
         display: 'flex',
         flexDirection: "column",
         alignItems: 'right',
     },
+    appName: {
+        color: 'black'
+    }
 }));
 
 interface NavBarProps {
@@ -47,11 +53,11 @@ export default function NavBar(props: NavBarProps) {
     };
 
     return (
-        <AppBar position="relative" style={{display: "flex"}}>
+        <AppBar position="relative" style={{display: "flex", backgroundColor: 'white'}}>
             <Toolbar className={classes.toolbar}>
                 <div className={classes.usersData}>
                     <ListAlt className={classes.icon} />
-                    <Typography variant="h5" color="inherit" noWrap>
+                    <Typography variant="h5" color="inherit" noWrap className={classes.appName}>
                         RighOnTime
                     </Typography>
                 </div>
