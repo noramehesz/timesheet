@@ -10,19 +10,39 @@ import {
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 import {TextField, IconButton} from "@material-ui/core";
+import {Day} from "../App";
+import {MaterialUiPickersDate} from "@material-ui/pickers/typings/date";
 
 interface RowProps {
     editing: boolean,
-    day: any;
+    day: Day;
     editFunction: () => void;
-    saveFunction: () => void;
+    saveFunction: (editing?: number) => void;
     deleteFunction: () => void;
 }
 
 export default function TimeSheetRow(props: RowProps) {
+    const [modifiedState, setModifiedState] = React.useState({day: {dateOfDay: "", arrive: "08:00", leave: "17:00", workingHours: '8'}});
 
-    const handleDateChange = () => {
+    const handleDateChange = (date: MaterialUiPickersDate | null) => {
+        let dateOfDay = `${date?.getFullYear()}-${date?.getMonth() as number + 1}-${date?.getDate()}`;
+        props.day.dateOfDay = dateOfDay;
+        props.saveFunction();
+    }
 
+    const handleArriveOnChange = (event: any) => {
+        props.day.arrive = event.target.value;
+        props.saveFunction();
+    }
+
+    const handleLeaveOnChange = (event: any) => {
+        props.day.leave = event.target.value;
+        props.saveFunction();
+    }
+
+    const handleHoursOnChange = (event: any) => {
+        props.day.workingHours = event.target.value;
+        props.saveFunction();
     }
 
     return (
@@ -37,28 +57,29 @@ export default function TimeSheetRow(props: RowProps) {
                             margin="normal"
                             id="date-picker-inline"
                             label="Date picker"
-                            value={"2020"}
-                            onChange={handleDateChange}
+                            value={props.day.dateOfDay}
+                            onChange={(date: MaterialUiPickersDate) => {handleDateChange(date)}}
                             KeyboardButtonProps={{
                                 'aria-label': 'change date',
                             }}
                         />
                     </MuiPickersUtilsProvider>
-                    : "2020-05-12"}
+                    : props.day.dateOfDay}
             </TableCell>
             <TableCell >
                 {props.editing ?
                     <TextField
-                        id="time"
+                        id="arrive"
                         type="time"
                         label={" "}
-                        defaultValue="08:00"
+                        defaultValue={props.day.arrive}
                         InputLabelProps={{
                             shrink: true,
                         }}
                         inputProps={{
                             step: 3000,
                         }}
+                        onChange={handleArriveOnChange}
                     /> : props.day.arrive
                 }
             </TableCell>
@@ -66,16 +87,17 @@ export default function TimeSheetRow(props: RowProps) {
                 {
                     props.editing ?
                         <TextField
-                            id="time"
+                            id="leave"
                             type="time"
                             label={" "}
-                            defaultValue="16:00"
+                            defaultValue={props.day.leave}
                             InputLabelProps={{
                                 shrink: true,
                             }}
                             inputProps={{
                                 step: 3000,
                             }}
+                            onChange={handleLeaveOnChange}
                         /> : props.day.leave
                 }
             </TableCell>
@@ -84,6 +106,8 @@ export default function TimeSheetRow(props: RowProps) {
                     type="number"
                     label=' '
                     style={{width: '75px'}}
+                    value={props.day.workingHours}
+                    onChange={handleHoursOnChange}
                 >
                 </TextField> : props.day.workingHours
                 }
@@ -91,7 +115,7 @@ export default function TimeSheetRow(props: RowProps) {
             <TableCell align={props.editing ? "center" : "right"}>{
                 props.editing ?
                     <IconButton
-                        onClick={props.saveFunction}
+                        onClick={() => {props.saveFunction(-1)}}
                     >
                         <Done/>
                     </IconButton> :

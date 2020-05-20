@@ -9,11 +9,12 @@ interface MainPageForStudentProps {
 }
 
 export default function MainPageForStudent(props: MainPageForStudentProps) {
-    return(
+    return (
         <div>
             <NavBar setUserState={props.setUserState}/>
-            <Typography style={{marginLeft: '60px', marginTop: '20px'}} variant='h6'>May</Typography>
-            <TimeSheet></TimeSheet>
+            <div style={{textAlign: "center"}}>
+                <TimeSheet></TimeSheet>
+            </div>
         </div>
     )
 }

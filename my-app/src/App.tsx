@@ -30,8 +30,8 @@ type Time = {
     minute: number,
 }
 
-type Day =  {
-    dayOfMoth: number,
+export type Day =  {
+    dateOfDay: string,
     arrive: string,
     leave: string,
     workingHours: string,

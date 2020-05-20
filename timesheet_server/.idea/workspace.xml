@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c78a155-12e2-4b59-9af8-5044dec33fac" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../my-app/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-app/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-app/src/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-app/src/StudentPages/MainPageForStudent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/StudentPages/MainPageForStudent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-app/src/TimeSheet/TimeSheetComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/TimeSheet/TimeSheetComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-app/src/TimeSheet/TimeSheetRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/TimeSheet/TimeSheetRow.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,6 +65,8 @@
       <workItem from="1589309781785" duration="5996000" />
       <workItem from="1589382593354" duration="2921000" />
       <workItem from="1589481251218" duration="1766000" />
+      <workItem from="1589918727039" duration="407000" />
+      <workItem from="1589981200251" duration="608000" />
     </task>
     <servers />
   </component>

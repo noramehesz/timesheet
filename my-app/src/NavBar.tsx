@@ -26,6 +26,9 @@ const useStyles = makeStyles(theme => ({
         marginTop: '4px',
     },
     logOutButton: {
+        marginRight: '20px',
+        textDecoration: 'none',
+        color: 'white',
         display: 'flex',
         flexDirection: "column",
         alignItems: 'right',
@@ -48,20 +51,12 @@ export default function NavBar(props: NavBarProps) {
             <Toolbar className={classes.toolbar}>
                 <div className={classes.usersData}>
                     <ListAlt className={classes.icon} />
-                    <Typography variant="h6" color="inherit" noWrap>
-                        TimeSheet
+                    <Typography variant="h5" color="inherit" noWrap>
+                        RighOnTime
                     </Typography>
                 </div>
-                <Link to={"/signIn"}  >
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        className={classes.logOutButton}
-                        onClick={handleLogOutOnClick}
-                    >
+                <Link to={"/signIn"} onClick={handleLogOutOnClick} className={classes.logOutButton}>
                         Log out
-                    </Button>
                 </Link>
             </Toolbar>
         </AppBar>
