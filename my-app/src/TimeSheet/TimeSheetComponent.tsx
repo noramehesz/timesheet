@@ -44,10 +44,10 @@ export default function TimeSheetComponent() {
     const testData: TimeSheet = {
         timeSheetDate: new Date("2020-05-01"),
         days: [
-            {dateOfDay: "2020-5-1", arrive: "08:00", leave: "17:00", workingHours: '8'},
-            {dateOfDay: "2020-5-2", arrive: "08:00", leave: "17:00", workingHours: '8'},
-            {dateOfDay: "2020-5-3", arrive: "08:00", leave: "17:00", workingHours: '8'},
-            {dateOfDay: "2020-5-4", arrive: "08:00", leave: "17:00", workingHours: '8'},
+            {dateOfDay: "2020-05-18", arrive: "10:00", leave: "19:00", workingHours: '8'},
+            {dateOfDay: "2020-05-19", arrive: "08:00", leave: "17:00", workingHours: '8'},
+            {dateOfDay: "2020-05-20", arrive: "09:00", leave: "14:00", workingHours: '8'},
+            {dateOfDay: "2020-05-21", arrive: "08:00", leave: "20:00", workingHours: '8'},
         ]
     };
     const [state, setState] = React.useState<TimeSheetComponentState>({rows: testData, editing: -1,});

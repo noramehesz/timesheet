@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from "../NavBar";
 import TimeSheet from '../TimeSheet/TimeSheetComponent';
-import CalendarDayView from "../TimeSheet/CalendarDayView";
+import CalendarView from "../TimeSheet/CalendarView";
 import {makeStyles} from "@material-ui/core/styles";
 
 interface MainPageForStudentProps {
@@ -68,7 +68,7 @@ export default function MainPageForStudent(props: MainPageForStudentProps) {
             </div>
             <div style={{textAlign: "center"}}>
                 {state.isTimeSheetView && <TimeSheet></TimeSheet> }
-                {!state.isTimeSheetView && <CalendarDayView/> }
+                {!state.isTimeSheetView && <CalendarView/> }
             </div>
         </div>
     )
