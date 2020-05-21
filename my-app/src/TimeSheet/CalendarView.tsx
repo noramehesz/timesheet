@@ -1,6 +1,7 @@
 import * as React from 'react';
-import CalendarDayView from "./CalendarDayView";
+import CalendarWeekView from "./WeekView";
 import {makeStyles} from "@material-ui/core/styles";
+import {TimeSheet} from "../App";
 
 const useStyles = makeStyles ({
     parentDiv: {
@@ -13,6 +14,10 @@ const useStyles = makeStyles ({
         paddingTop: '20px'
     }
 });
+
+interface CalendarWeekProps {
+    timesheet: TimeSheet
+}
 
 
 const getCurrentWeek = () => {
@@ -29,14 +34,14 @@ const getCurrentWeek = () => {
     return week;
 }
 
-export default function CalendarView() {
+export default function CalendarView(props: CalendarWeekProps) {
     const classes = useStyles();
     const currWeek = getCurrentWeek();
 
     return(
       <div className={classes.parentDiv}>
           <div className={classes.children}>
-              <CalendarDayView/>
+              <CalendarWeekView timesheet={props.timesheet}/>
           </div>
       </div>
     );

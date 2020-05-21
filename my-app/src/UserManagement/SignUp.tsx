@@ -72,16 +72,18 @@ export default function SignUp(props: SignUpProps) {
                 console.log(res);
                 let user = res.data.createdUser;
                 props.setUser({
-                    username: user.username,
-                    email: user.email,
-                    role: user.role,
-                    id: user.id,
-                    name: user.name,
-                    school: user.school,
-                    students: user.students,
-                    timeSheets: user.timesheets,
-                    companies: user.companies,
-                    employees: user.employees,
+                    user: {
+                        username: user.username,
+                        email: user.email,
+                        role: user.role,
+                        id: user._id,
+                        name: user.name,
+                        school: user.school,
+                        students: user.students,
+                        timesheets: user.timesheets,
+                        companies: user.companies,
+                        employees: user.employees,
+                    }
                 });
             }
         );

@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
+import {resolveSrv} from 'dns';
 
 const TimeSheetSchema = new mongoose.Schema({
-    owner: {type: [mongoose.Types.ObjectId], required: true},
-    job: String,
-    timeSheetDate: Date,
-    days: [],
+    owner: {type: [mongoose.Types.ObjectId], required: false},
+    job: {type: String, required: false},
+    timeSheetDate: {type: String, required: false},
+    days: {type: Array<Day>(),required: false},
 });
 
 type Time = {
@@ -13,10 +14,10 @@ type Time = {
 }
 
 type Day =  {
-    dayOfMoth: number,
-    arrive: Time,
-    leave: Time,
-    workingHours: number,
+    dateOfMoth: string,
+    arrive: string,
+    leave: string,
+    workingHours: string,
 }
 
 

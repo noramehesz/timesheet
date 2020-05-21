@@ -67,8 +67,8 @@ export default function MainPageForStudent(props: MainPageForStudentProps) {
                 </div>
             </div>
             <div style={{textAlign: "center"}}>
-                {state.isTimeSheetView && <TimeSheet></TimeSheet> }
-                {!state.isTimeSheetView && <CalendarView/> }
+                {state.isTimeSheetView && <TimeSheet user={props.user} setUser={props.setUserState}></TimeSheet> }
+                {!state.isTimeSheetView && <CalendarView timesheet={props.user.timesheets[0]}/> }
             </div>
         </div>
     )

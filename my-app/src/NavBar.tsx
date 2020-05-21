@@ -49,7 +49,8 @@ export default function NavBar(props: NavBarProps) {
     const classes = useStyles();
 
     const handleLogOutOnClick = () => {
-        props.setUserState(null);
+        props.setUserState({user: null});
+        document.cookie = "userId=";
     };
 
     return (
@@ -58,7 +59,7 @@ export default function NavBar(props: NavBarProps) {
                 <div className={classes.usersData}>
                     <ListAlt className={classes.icon} />
                     <Typography variant="h5" color="inherit" noWrap className={classes.appName}>
-                        RighOnTime
+                        RightOnTime
                     </Typography>
                 </div>
                 <Link to={"/signIn"} onClick={handleLogOutOnClick} className={classes.logOutButton}>

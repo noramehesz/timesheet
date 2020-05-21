@@ -49,19 +49,23 @@ export default function SignIn(props: SignInProps) {
 
     const handleSignInOnClick = async (event: any) => {
         await axios.post(`http://localhost:3001/user/login`, toLogin).then(res => {
-                    let user = res.data;
-                    props.setUser({
+                let user = res.data;
+                console.warn(user);
+                props.setUser({
+                    user: {
                         username: user.username,
                         email: user.email,
                         role: user.role,
-                        id: user.id,
+                        id: user._id,
                         name: user.name,
                         school: user.school,
                         students: user.students,
-                        timeSheets: user.timesheets,
+                        timesheets: user.timesheets.length < 1 ? [{timeSheetDate: "2020-05-01", days: []}] : user.timesheets,
                         companies: user.companies,
                         employees: user.employees,
-                    });
+                    }
+                });
+                document.cookie = `userId=${user._id}`;
             }).catch(error => {
                 setIsWrongData({isWrong: true});
                 console.error(error);

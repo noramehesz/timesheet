@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema({
     password: {type: String, required: true},
     username: {type: String, required: true},
     school: {type: String, required: false},
-    timesheets: {type: [mongoose.Types.ObjectId], required: false},
+    timesheets: {type: Array<any>(), required: false},
     students: {type: [{student: this, job: String}], required: false},
     companies: {type: [this], required: false},
     employees: {type: [this], required: false},
@@ -84,6 +84,9 @@ class User extends mongoose.Document {
 
     static updateUserById(id: string, data: any) {
         return UserModel.findByIdAndUpdate(id, data, (error, document) => {
+            if (error) {
+                console.log(error);
+            }
             console.log(`update a user with id: ${id}`);
         })
     }

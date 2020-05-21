@@ -125,7 +125,7 @@ export default function TimeSheetRow(props: RowProps) {
                     >
                         <Edit/>
                     </IconButton>
-                    <IconButton>
+                    <IconButton onClick={props.deleteFunction}>
                         <Delete/>
                     </IconButton>
                     </div>

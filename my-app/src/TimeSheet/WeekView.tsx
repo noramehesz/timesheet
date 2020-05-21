@@ -33,7 +33,11 @@ const resources = [{
     ],
 }];
 
-export default function CalendarDayView() {
+interface WeekViewProps {
+    timesheet: TimeSheet
+}
+
+export default function CalendarWeekView(props: WeekViewProps) {
     const [currentDate, setCurrentDate] = React.useState<SchedulerDateTime>(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`);
     const testData: TimeSheet = {
         timeSheetDate: new Date("2020-05-01"),
@@ -46,10 +50,14 @@ export default function CalendarDayView() {
     };
 
     const testAppointments: Array<AppointmentModel> = [];
-    testData.days.forEach(day => {
+    props.timesheet.days.forEach(day => {
+        const currDate: string[] = day.dateOfDay.split("-");
+        const month: string = parseInt(currDate[1]) < 10 ? `0${currDate[1]}` : currDate[1];
+        const today: string = parseInt(currDate[2]) < 10 ? `0${currDate[2]}` : currDate[2];
+        const dateOfTheDay = `${currDate[0]}-${month}-${today}`;
         const data = {
-            startDate: `${day.dateOfDay}T${day.arrive}`,
-            endDate: `${day.dateOfDay}T${day.leave}`,
+            startDate: `${dateOfTheDay}T${day.arrive}`,
+            endDate: `${dateOfTheDay}T${day.leave}`,
             title: 'Work',
             type: 'private',
         }
