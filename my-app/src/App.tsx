@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import SignIn from './UserManagement/SignIn';
 import MainPageForStudent from  './StudentPages/MainPageForStudent';
+import MainPageForCompany from "./CompanyPages/MainPageForCompany";
 import {
     BrowserRouter as Router,
     Switch,
@@ -63,11 +64,12 @@ function App() {
             console.log(userId);
             axios.get(`http://localhost:3001/user/${userId}`).then((res) => {
                 let user = res.data;
+                let userRole = res.data.role === "student" ? UserType.student : UserType.company;
                 setState({
                   user: {
                       username: user.username,
                       email: user.email,
-                      role: user.role,
+                      role: userRole,
                       id: user._id,
                       name: user.name,
                       school: user.school,
@@ -98,10 +100,15 @@ function App() {
                     <Route path={"/signUp"}>
                         <SignUp setUser={setState}/>
                     </Route>
-                    {state.user != null &&
+                    {(state.user != null && state.user.role === UserType.student) &&
                         <Route path={"/studentPage"}>
                             <MainPageForStudent user={state.user} setUserState={setState}/>
                         </Route>
+                    }
+                    {(state.user != null && state.user.role === UserType.company) &&
+                    <Route path={"/companyPage"}>
+                        <MainPageForCompany user={state.user}/>
+                    </Route>
                     }
                     <Route path={"/"}>
                         <SignIn setUser={setState}/>

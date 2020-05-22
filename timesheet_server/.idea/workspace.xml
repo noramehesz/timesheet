@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c78a155-12e2-4b59-9af8-5044dec33fac" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../my-app/src/TimeSheet/TimeSheetComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/TimeSheet/TimeSheetComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-app/src/CompanyPages/MainPageForCompany.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-app/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-app/src/UserManagement/SignIn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-app/src/UserManagement/SignIn.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +66,7 @@
       <workItem from="1589918727039" duration="407000" />
       <workItem from="1589981200251" duration="608000" />
       <workItem from="1590060085432" duration="5677000" />
-      <workItem from="1590151769115" duration="292000" />
+      <workItem from="1590151769115" duration="575000" />
     </task>
     <servers />
   </component>
