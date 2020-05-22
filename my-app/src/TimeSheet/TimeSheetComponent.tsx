@@ -88,12 +88,20 @@ export default function TimeSheetComponent(props: TimeSheetProps) {
                 ...state,
                 editing: editing
             });
+            const sortedSheets = props.user.timesheets;
+            sortedSheets.forEach((sheet: TimeSheet) => {
+                sheet.days.sort((a: any, b: any) => {
+                    const aDate: any = new Date(a.dateOfDay);
+                    const bDate: any = new Date(b.dateOfDay);
+                    return aDate - bDate;
+                });
+            });
             props.setUser({
                 user: {
                     ...props.user,
+                    timesheets: sortedSheets,
                 }
             });
-            console.error(props.user);
             axios.put(`http://localhost:3001/user`, props.user).then(res => {
                 console.log(res);
             })
