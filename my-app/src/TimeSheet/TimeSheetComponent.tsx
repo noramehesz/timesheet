@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,11 +8,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TimeSheetRow from "./TimeSheetRow";
-import { TimeSheet, Day } from '../App';
+import {ApproveStatus, Day, TimeSheet} from '../App';
 import Typography from "@material-ui/core/Typography";
 import IconButton from '@material-ui/core/IconButton';
-import {Add} from "@material-ui/icons";
+import {Add, Done} from "@material-ui/icons";
 import axios from "axios";
+import Button from '@material-ui/core/Button';
+import Fab from "@material-ui/core/Fab";
 
 const useStyles = makeStyles({
     timetable: {
@@ -29,12 +31,24 @@ const useStyles = makeStyles({
         margin: '10px',
         width: 900,
         align: 'center'
+    },
+    requestButton: {
+        marginLeft: '724px'
+    },
+    cancelButton: {
+        marginLeft: '730px'
+    },
+    approvedButton: {
+        backgroundColor: '#88D8404A',
+        textDecorationColor: 'white',
+        marginLeft: '764px'
     }
 });
 
 interface TimeSheetComponentState {
     rows: any;
     editing: number;
+    approveStatus: ApproveStatus;
 }
 
 interface TimeSheetProps {
@@ -56,7 +70,7 @@ export default function TimeSheetComponent(props: TimeSheetProps) {
             {dateOfDay: "2020-05-21", arrive: "08:00", leave: "20:00", workingHours: '6'},
         ]
     };
-    const [state, setState] = React.useState<TimeSheetComponentState>({rows: [], editing: -1,});
+    const [state, setState] = React.useState<TimeSheetComponentState>({rows: [], editing: -1, approveStatus: props.user.timesheets[0].approveStatus ?? ApproveStatus.none});
     const classes = useStyles();
 
     const handleEditOnCLick = (idx: number) => {
@@ -79,7 +93,7 @@ export default function TimeSheetComponent(props: TimeSheetProps) {
                 ...props.user,
                 timesheets: newSheet,
             }
-        })
+        });
     }
 
     const handleSaveOnCLick = (editing?: number) => {
@@ -95,6 +109,12 @@ export default function TimeSheetComponent(props: TimeSheetProps) {
                     const bDate: any = new Date(b.dateOfDay);
                     return aDate - bDate;
                 });
+                sheet.approveStatus = sheet.approveStatus == null ? ApproveStatus.none : sheet.approveStatus;
+                const putSheet = {
+                    ...sheet,
+                    owner: props.user.id,
+                }
+                axios.put(`http://localhost:3001/timeSheet`, putSheet);
             });
             props.setUser({
                 user: {
@@ -104,7 +124,8 @@ export default function TimeSheetComponent(props: TimeSheetProps) {
             });
             axios.put(`http://localhost:3001/user`, props.user).then(res => {
                 console.log(res);
-            })
+            });
+            console.log(sortedSheets);
         } else {
             setState({
                 ...state,
@@ -131,6 +152,36 @@ export default function TimeSheetComponent(props: TimeSheetProps) {
                 timesheets: extendedData
             }
         });
+    }
+
+    const handleRequestButtonOnClick = () => {
+        const changedTimeSheet = props.user.timesheets;
+        changedTimeSheet[0].approveStatus = ApproveStatus.requested;
+        setState({
+            ...state,
+            approveStatus: ApproveStatus.requested,
+        });
+        props.setUser({
+            ...props.user,
+            timesheets: changedTimeSheet,
+        });
+        axios.put(`http://localhost:3001/user`, props.user);
+        console.log(props.user);
+    }
+
+    const handleCancelButtonOnClick = () => {
+        setState({
+            ...state,
+            approveStatus: ApproveStatus.none,
+        });
+        const changedTimeSheet = props.user.timesheets;
+        changedTimeSheet[0].approveStatus = ApproveStatus.none;
+        props.setUser({
+            ...props.user,
+            timesheets: changedTimeSheet,
+        });
+        axios.put(`http://localhost:3001/user`, props.user);
+        console.log(props.user);
     }
 
     return (
@@ -165,6 +216,39 @@ export default function TimeSheetComponent(props: TimeSheetProps) {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <div>
+                {state.approveStatus === ApproveStatus.none &&
+                (<Button color={"primary"}
+                         variant="contained"
+                         className={classes.requestButton}
+                         onClick={handleRequestButtonOnClick}
+                            >
+                    Request approval
+                </Button>)
+                }
+                {state.approveStatus === ApproveStatus.requested &&
+                <div>
+                    <Button color={"secondary"}
+                            variant={"contained"}
+                            className={classes.cancelButton}
+                            onClick={handleCancelButtonOnClick}>
+                        Cancel request
+                    </Button>
+                </div>
+                }
+                {state.approveStatus === ApproveStatus.approved &&
+                <div>
+                    <Fab variant="extended"
+                         size="medium"
+                         aria-label="Add"
+                         className={classes.approvedButton}
+                         disabled={true}>
+                        <Done></Done>
+                        Approved
+                    </Fab>
+                </div>
+                }
+            </div>
         </div>
     );
 }

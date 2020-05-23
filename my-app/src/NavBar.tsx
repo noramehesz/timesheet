@@ -54,7 +54,7 @@ export default function NavBar(props: NavBarProps) {
     };
 
     return (
-        <AppBar position="relative" style={{display: "flex", backgroundColor: 'white'}}>
+        <AppBar position="relative" style={{display: "flex", backgroundColor: 'white'}} elevation={2}>
             <Toolbar className={classes.toolbar}>
                 <div className={classes.usersData}>
                     <ListAlt className={classes.icon} />

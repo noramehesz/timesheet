@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
     username: {type: String, required: true},
     school: {type: String, required: false},
     timesheets: {type: Array<any>(), required: false},
-    students: {type: [{student: this, job: String}], required: false},
+    students: {type: Array<any>(), required: false},
     companies: {type: [this], required: false},
     employees: {type: [this], required: false},
     role: {type: UserType, required: true},

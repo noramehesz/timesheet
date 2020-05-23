@@ -24,7 +24,14 @@ export type TimeSheet = {
     job?: String,
     timeSheetDate: Date,
     days: Day[],
+    approveStatus?: ApproveStatus,
 };
+
+export enum ApproveStatus {
+    none = "none",
+    requested = "requsted",
+    approved = "approved",
+}
 
 type Time = {
     hour: number,
@@ -74,7 +81,7 @@ function App() {
                       name: user.name,
                       school: user.school,
                       students: user.students,
-                      timesheets: user.timesheets.length < 1 ? [{timeSheetDate: new Date(2020, 5, 1), days: []}] : user.timesheets,
+                      timesheets: user.timesheets?.length < 1 ? [{timeSheetDate: new Date(2020, 5, 1), days: [], approveStatus: ApproveStatus.none}] : user.timesheets,
                       companies: user.companies,
                       employees: user.employees,
                   }
@@ -107,7 +114,7 @@ function App() {
                     }
                     {(state.user != null && state.user.role === UserType.company) &&
                     <Route path={"/companyPage"}>
-                        <MainPageForCompany user={state.user}/>
+                        <MainPageForCompany user={state.user} setUserState={setState}/>
                     </Route>
                     }
                     <Route path={"/"}>

@@ -3,6 +3,10 @@ import NavBar from "../NavBar";
 import TimeSheet from '../TimeSheet/TimeSheetComponent';
 import CalendarView from "../TimeSheet/CalendarView";
 import {makeStyles} from "@material-ui/core/styles";
+import Fab from '@material-ui/core/Fab';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import Paper from '@material-ui/core/Paper';
 
 interface MainPageForStudentProps {
     user: any;
@@ -34,6 +38,11 @@ const useStyle = makeStyles({
     },
     parentDiv: {
         display: 'flex',
+    },
+    tabRoot: {
+        flexGrow: 1,
+        marginLeft: '40px',
+        marginRight: '40px'
     }
 })
 
@@ -55,19 +64,34 @@ export default function MainPageForStudent(props: MainPageForStudentProps) {
         });
     }
 
+    const handleTabOnChange = (event: any, newValue: number) => {
+        setState({
+            isTimeSheetView: newValue === 0 ? true : false,
+        })
+    }
+
     return (
         <div>
             <NavBar setUserState={props.setUserState}/>
-            <div className={classes.parentDiv}>
-                <div className={state.isTimeSheetView === true ? classes.activeOptions : classes.options} onClick={handleTSViesOnClick}>
-                    Time Sheet view
-                </div>
-                <div className={state.isTimeSheetView === false ? classes.activeOptions : classes.options} onClick={handleCalendarViewOnClick}>
-                    Calendar view
-                </div>
+            <div>
+                <Paper className={classes.tabRoot}>
+                    <Tabs
+                        value={state.isTimeSheetView === true ? 0 : 1}
+                        onChange={handleTabOnChange}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        centered
+                        variant={'fullWidth'}
+                    >
+                        <Tab label={"Time Sheet view"}/>
+                        <Tab label={"Calendar view"}/>
+                    </Tabs>
+                </Paper>
             </div>
             <div style={{textAlign: "center"}}>
-                {state.isTimeSheetView && <TimeSheet user={props.user} setUser={props.setUserState}></TimeSheet> }
+                {state.isTimeSheetView && (
+                    <TimeSheet user={props.user} setUser={props.setUserState}></TimeSheet>
+                )}
                 {!state.isTimeSheetView && <CalendarView timesheet={props.user.timesheets[0]}/> }
             </div>
         </div>

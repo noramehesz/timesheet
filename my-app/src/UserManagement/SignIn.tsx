@@ -1,23 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import axios from "axios";
-import {UserType, User} from "../App";
+import {ApproveStatus, UserType} from "../App";
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -47,18 +40,28 @@ interface SignInState {
     password: string;
     username: string;
     isWrong: boolean;
-    user: User | null;
+    userRole: UserType | null;
 }
 
 export default function SignIn(props: SignInProps) {
     const classes = useStyles();
+    const history = useHistory();
     const [toLogin, setToLogin] = React.useState({password: "", username: ''});
     const [isWrongData, setIsWrongData] = React.useState({isWrong: false});
-    const [userFromServer, setUserFromServer] = React.useState<SignInState>({user: null, isWrong: false, password: "", username: ''});
+    const [userFromServer, setUserFromServer] = React.useState<SignInState>({userRole: null, isWrong: false, password: "", username: ''});
+
+    useEffect(() => {
+        setUserFromServer({
+            ...userFromServer,
+            userRole: null,
+        })
+    }, []);
 
     const handleSignInOnClick = async (event: any) => {
+        event.preventDefault();
+        let user: any;
         await axios.post(`http://localhost:3001/user/login`, toLogin).then(res => {
-                let user = res.data;
+                user = res.data;
                 console.warn(user);
                 let userRole = res.data.role === "student" ? UserType.student : UserType.company;
                 props.setUser({
@@ -70,27 +73,18 @@ export default function SignIn(props: SignInProps) {
                         name: user.name,
                         school: user.school,
                         students: user.students,
-                        timesheets: user.timesheets.length < 1 ? [{timeSheetDate: "2020-05-01", days: []}] : user.timesheets,
+                        timesheets: user.timesheets?.length < 1 ? [{timeSheetDate: "2020-05-01", days: [], approveStatus: ApproveStatus.none}] : user.timesheets,
                         companies: user.companies,
                         employees: user.employees,
                     }
                 });
                 setUserFromServer({
                     ...userFromServer,
-                    user: {
-                        username: user.username,
-                        email: user.email,
-                        role: userRole,
-                        id: user._id,
-                        name: user.name,
-                        school: user.school,
-                        students: user.students,
-                        timesheets: user.timesheets.length < 1 ? [{timeSheetDate: "2020-05-01", days: []}] : user.timesheets,
-                        companies: user.companies,
-                        employees: user.employees,
-                    }
-                })
+                    userRole: userRole,
+                });
                 document.cookie = `userId=${user._id}`;
+                const navigateTo = userRole === UserType.student ? "/studentPage" : "companyPage";
+                history.push(navigateTo);
             }).catch(error => {
                 setIsWrongData({isWrong: true});
                 console.error(error);
@@ -154,9 +148,8 @@ export default function SignIn(props: SignInProps) {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        onClick={handleSignInOnClick}
                     >
-                        <Link to={userFromServer.user?.role === UserType.student ? "/studentPage" : "/companyPage"} style={{color: "white"}}>
+                        <Link to={userFromServer.userRole === UserType.student ? "/studentPage" : "/companyPage"} style={{color: "white", textDecoration: 'none'}} onClick={handleSignInOnClick}>
                         Sign In
                         </Link>
                     </Button>
