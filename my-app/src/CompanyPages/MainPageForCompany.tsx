@@ -21,10 +21,12 @@ const useStyle = makeStyles((theme: Theme) =>
             height: '100%',
             display: 'flex',
             justifyContent: 'center',
+            marginTop: '1px'
         },
         students: {
             width: '30%',
             height: '100%',
+            marginRight: '1px'
         },
         pendingrequests: {
             width: '70%',
@@ -105,12 +107,12 @@ export default function CompanyPage(props: CompanyPageProps) {
         });
     }
 
-    const handleApproveTimeSheetOnCLick = (id: string, timesheetIdx: number) => {
+    const approveOrReject = (id: string, timesheetIdx: number, isApprove: boolean) => {
         let changedIdx: number = -1;
         const student = companyState.students?.filter((stud, idx) => {changedIdx = idx; return stud.id === id;})[0] ?? {};
         if (student.timesheets !== null && changedIdx > -1) {
             console.log(student);
-            student.timesheets[timesheetIdx].approveStatus = ApproveStatus.approved;
+            student.timesheets[timesheetIdx].approveStatus = isApprove ? ApproveStatus.approved : ApproveStatus.none;
             axios.put(`http://localhost:3001/user`, student);
             let studentsInState = companyState.students ?? [];
             studentsInState[changedIdx] = student;
@@ -121,8 +123,12 @@ export default function CompanyPage(props: CompanyPageProps) {
         }
     }
 
-    const handleRejectTimeSheetOnCLick = () => {
+    const handleApproveTimeSheetOnCLick = (id: string, timesheetIdx: number) => {
+        approveOrReject(id, timesheetIdx, true);
+    }
 
+    const handleRejectTimeSheetOnCLick = (id: string, timesheetIdx: number) => {
+        approveOrReject(id, timesheetIdx, false);
     }
 
     const getStudentsRequests = (id: string | null) => {
@@ -173,7 +179,8 @@ export default function CompanyPage(props: CompanyPageProps) {
                                             </Button>
                                             <Button variant={"contained"}
                                                     color={"secondary"}
-                                                    size={'small'}>
+                                                    size={'small'}
+                                                    onClick={() => {handleRejectTimeSheetOnCLick(id, idx)}}>
                                                 Reject
                                             </Button>
                                         </Grid>
@@ -192,7 +199,7 @@ export default function CompanyPage(props: CompanyPageProps) {
                 <div className={classes.studentRequestsDiv}>
                     {!haveRequest &&
                     <Typography>
-                        Everything is approved!
+                        Nothing to show!
                     </Typography>}
                     {haveRequest && showRequests(timeSheetWithRequests)
                     }
@@ -203,7 +210,7 @@ export default function CompanyPage(props: CompanyPageProps) {
 
     return (
         <div>
-            <NavBar setUserState={props.setUserState}/>
+            <NavBar setUserState={props.setUserState} isCompany={true}/>
             <div className={classes.requests}>
                 <div>
                     <Paper>
