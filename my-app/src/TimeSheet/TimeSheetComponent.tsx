@@ -33,15 +33,21 @@ const useStyles = makeStyles({
         align: 'center'
     },
     requestButton: {
-        marginLeft: '724px'
+        display: "flex",
+        float: 'right',
+        marginRight: '9px'
     },
     cancelButton: {
-        marginLeft: '730px'
+        display: "flex",
+        float: 'right',
+        marginRight: '9px'
     },
     approvedButton: {
         backgroundColor: '#88D8404A',
         textDecorationColor: 'white',
-        marginLeft: '764px'
+        display: "flex",
+        float: 'right',
+        marginRight: '9px'
     }
 });
 

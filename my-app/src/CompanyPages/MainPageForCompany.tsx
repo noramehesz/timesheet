@@ -167,7 +167,7 @@ export default function CompanyPage(props: CompanyPageProps) {
                                         <div className={classes.descriptionName}>
                                             <ListItemText primary={`Time Sheet ${months[new Date(sheet.timeSheetDate).getMonth() - 1]}`}/>
                                                 <p>{`Working days: ${sheet.days.length}`}</p>
-                                                <p>{`working hours: ${getWorkingHours(sheet.days)}`}</p>
+                                                <p>{`Working hours: ${getWorkingHours(sheet.days)}`}</p>
                                         </div>
                                         <Grid container direction={'row'} justify={'flex-end'} alignItems={'center'}>
                                             <Button variant={"contained"}
