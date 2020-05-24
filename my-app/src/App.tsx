@@ -29,8 +29,9 @@ export type TimeSheet = {
 
 export enum ApproveStatus {
     none = "none",
-    requested = "requsted",
+    requested = "requested",
     approved = "approved",
+    reject = "rejected"
 }
 
 type Time = {
