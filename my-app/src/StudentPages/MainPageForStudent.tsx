@@ -15,6 +15,8 @@ interface MainPageForStudentProps {
 
 interface StudentPageState {
     isTimeSheetView: boolean,
+    timeSheets: any;
+    activeMonth: number;
 }
 
 const useStyle = makeStyles({
@@ -46,33 +48,53 @@ const useStyle = makeStyles({
     }
 })
 
-
-
 export default function MainPageForStudent(props: MainPageForStudentProps) {
     const classes = useStyle();
-    const [state, setState] = React.useState<StudentPageState>({isTimeSheetView: true});
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ]
+    const [state, setState] = React.useState<StudentPageState>({isTimeSheetView: true, timeSheets: props.user.timesheets, activeMonth: new Date().getMonth()});
 
     const handleTSViesOnClick = () => {
         setState({
+            ...state,
             isTimeSheetView: true
         });
     }
 
     const handleCalendarViewOnClick = () => {
         setState({
+            ...state,
             isTimeSheetView: false
         });
     }
 
     const handleTabOnChange = (event: any, newValue: number) => {
         setState({
+            ...state,
             isTimeSheetView: newValue === 0 ? true : false,
         })
     }
 
+    const selectActiveMonth = (event: any) => {
+        setState({
+            ...state,
+            activeMonth: months.indexOf(event.target.value),
+        });
+    }
+
     return (
         <div>
-            <NavBar setUserState={props.setUserState}/>
+            <NavBar
+                setUserState={props.setUserState}
+                isCompany={false}
+                dropdownOptions={
+                    state.timeSheets.map((sheet: any) => months[new Date(sheet.timeSheetDate).getMonth() - 1])
+                }
+                activeMonth={months[state.activeMonth]}
+                handleDropdownOnChange={selectActiveMonth}
+            />
             <div>
                 <Paper className={classes.tabRoot}>
                     <Tabs

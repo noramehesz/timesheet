@@ -7,7 +7,8 @@ const useStyles = makeStyles ({
     parentDiv: {
         display: 'flex',
         justifyContent: 'center',
-        width: '650'
+        width: '650',
+        marginTop: '10px'
     },
     children: {
         width: '900px',

@@ -61,6 +61,7 @@ export type User = {
 
 interface AppState {
     user: User | null;
+    timeSheets?: Array<any>;
 }
 
 function App() {
@@ -74,18 +75,22 @@ function App() {
                 let user = res.data;
                 let userRole = res.data.role === "student" ? UserType.student : UserType.company;
                 setState({
-                  user: {
-                      username: user.username,
-                      email: user.email,
-                      role: userRole,
-                      id: user._id,
-                      name: user.name,
-                      school: user.school,
-                      students: user.students,
-                      timesheets: user.timesheets?.length < 1 ? [{timeSheetDate: new Date(2020, 5, 1), days: [], approveStatus: ApproveStatus.none}] : user.timesheets,
-                      companies: user.companies,
-                      employees: user.employees,
-                  }
+                    user: {
+                        username: user.username,
+                        email: user.email,
+                        role: userRole,
+                        id: user._id,
+                        name: user.name,
+                        school: user.school,
+                        students: user.students,
+                        timesheets: user.timesheets?.length < 1 ? [{
+                            timeSheetDate: new Date(2020, 5, 1),
+                            days: [],
+                            approveStatus: ApproveStatus.none
+                        }] : user.timesheets,
+                        companies: user.companies,
+                        employees: user.employees,
+                    }
                 });
             })
         }

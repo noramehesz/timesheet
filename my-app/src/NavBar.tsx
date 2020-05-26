@@ -9,7 +9,18 @@ import {makeStyles} from "@material-ui/core/styles";
 import { Info, Accessibility, SupervisedUserCircle, TrendingDown, Autorenew } from "@material-ui/icons";
 import Menu from "@material-ui/core/Menu";
 import IconButton from "@material-ui/core/IconButton";
-import {Drawer, Icon, List, ListItem, Divider, ListItemText} from "@material-ui/core";
+import {
+    Drawer,
+    Icon,
+    List,
+    ListItem,
+    Divider,
+    ListItemText,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select
+} from "@material-ui/core";
 import {resolveNaptr} from "dns";
 
 
@@ -55,16 +66,24 @@ const useStyles = makeStyles(theme => ({
     },
     aboutLabel: {
         margin: '10px'
-    }
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 200,
+    },
 }));
 
 interface NavBarProps {
     setUserState: any;
     isCompany?: boolean;
+    handleDropdownOnChange?: any;
+    dropdownOptions?: any;
+    activeMonth?: string;
 }
 
 interface NavBarState {
     sidebarIsOpen: boolean;
+    options?: Array<number>;
 }
 
 export default function NavBar(props: NavBarProps) {
@@ -79,6 +98,7 @@ export default function NavBar(props: NavBarProps) {
     const toggleDrawer = (isOpen: boolean) =>  {
         console.log("iconbuttononclick");
         setNavBarState({
+            ...navBarState,
             sidebarIsOpen: isOpen,
         })
     };
@@ -142,6 +162,30 @@ export default function NavBar(props: NavBarProps) {
                         RightOnTime
                     </Typography>
                 </div>
+                {!props.isCompany &&
+                    <div>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel id="month">Month</InputLabel>
+                            <Select
+                                labelId="month"
+                                id="select-month-id"
+                                value={props.activeMonth as string}
+                                defaultValue={props.activeMonth}
+                                onChange={props.handleDropdownOnChange}
+                                label="Month"
+                                native={false}
+                            >
+                                {props.dropdownOptions.map((option: any) => {
+                                    return (
+                                        <MenuItem value={option}>
+                                            {option}
+                                        </MenuItem>
+                                    )
+                                })}
+                            </Select>
+                        </FormControl>
+                    </div>
+                }
                 <div className={classes.buttonsDiv}>
                     <React.Fragment key={'right'}>
                         <IconButton className={classes.infoButton} onClick={() => {toggleDrawer(true)}}>

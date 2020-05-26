@@ -55,11 +55,14 @@ interface TimeSheetComponentState {
     rows: any;
     editing: number;
     approveStatus: ApproveStatus;
+    sheets: any;
+
 }
 
 interface TimeSheetProps {
     user: any;
     setUser: any;
+    activeMonth?: any;
 }
 
 export default function TimeSheetComponent(props: TimeSheetProps) {
@@ -76,7 +79,13 @@ export default function TimeSheetComponent(props: TimeSheetProps) {
             {dateOfDay: "2020-05-21", arrive: "08:00", leave: "20:00", workingHours: '6'},
         ]
     };
-    const [state, setState] = React.useState<TimeSheetComponentState>({rows: [], editing: -1, approveStatus: props.user.timesheets[0].approveStatus ?? ApproveStatus.none});
+    const [state, setState] = React.useState<TimeSheetComponentState>(
+        {
+            rows: [],
+            editing: -1,
+            approveStatus: props.user.timesheets[0].approveStatus ?? ApproveStatus.none,
+            sheets: props.user.timesheets,
+        });
     const classes = useStyles();
 
     const handleEditOnCLick = (idx: number) => {
@@ -192,9 +201,9 @@ export default function TimeSheetComponent(props: TimeSheetProps) {
 
     return (
         <div className={classes.timetable}>
-            <Typography variant="h5" color="inherit" noWrap className={classes.tableContainer}>
-               {months[props.user.timesheets[0].timeSheetDate]}
-            </Typography>
+            {/*<Typography variant="h5" color="inherit" noWrap className={classes.tableContainer}>*/}
+            {/*   {months[new Date(props.user.timesheets[0].timeSheetDate).getMonth() - 1]}*/}
+            {/*</Typography>*/}
             <TableContainer component={Paper} className={classes.tableContainer}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
